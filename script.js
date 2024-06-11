@@ -2,6 +2,14 @@ const notesContainer = document.querySelector(".notes-container");
 const Btn = document.querySelector(".btn");
 let notes = document.querySelectorAll(".input-Box");
 
+function upStorage() {
+  localStorage.setItem("notes", notesContainer.innerHTML);
+}
+
+function getStorage() {
+  notesContainer.innerHTML = localStorage.getItem("notes");
+}
+getStorage();
 Btn.addEventListener("click", () => {
   let inputBox = document.createElement("p");
   let img = document.createElement("img");
@@ -25,11 +33,9 @@ notesContainer.addEventListener("click", function (e) {
   }
 });
 
-function upStorage() {
-  localStorage.setItem("notes", notesContainer.innerHTML);
-}
-
-function getStorage() {
-  notesContainer.innerHTML = localStorage.getItem("notes");
-}
-getStorage();
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    document.execCommand("insertLineBreak");
+    event.preventDefault();
+  }
+});
